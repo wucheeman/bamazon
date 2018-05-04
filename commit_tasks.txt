@@ -1,5 +1,6 @@
 PRIMARY ASSIGNMENT
-[] sql seed file for initial DB
+[] initial sql seed file for DB
+[] seed file populates DB with data
 [] pseudocode for bamazonCustomer.js
 
 BONUS 1
