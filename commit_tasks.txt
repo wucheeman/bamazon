@@ -1,0 +1,13 @@
+PRIMARY ASSIGNMENT
+[] sql seed file for initial DB
+[] pseudocode for bamazonCustomer.js
+
+BONUS 1
+[] pseudocode for bamazonManager.js
+
+BONUS 2
+[] sql seed file update for departments table
+
+BONUS 3
+[] sql seed file update
+[] bamazonSupervisor.js
