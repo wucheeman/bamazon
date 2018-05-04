@@ -1,0 +1,11 @@
+# Build and Release Folders
+
+# Other files and folders
+snippets/
+node_modules/
+target/
+
+# Executables
+
+
+
