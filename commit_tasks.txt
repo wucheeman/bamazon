@@ -2,6 +2,13 @@ PRIMARY ASSIGNMENT
 [x] initial sql seed file for DB
 [x] seed file populates DB with data
 [x] pseudocode for bamazonCustomer.js
+[] package.json and package-lock.json with dependencies
+[] connect to bamazon
+[] retrieve all products and display product id, name, and price for each product
+[] prompt for query id to purchase and quantity desired
+[] check quantity available and accept or reject
+	() if quantity insufficient, refuse
+	() else fulfill order, update quantity, and show total price
 
 BONUS 1
 [] pseudocode for bamazonManager.js

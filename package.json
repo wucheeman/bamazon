@@ -1,0 +1,27 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "## What the project does This is an implementation of the Bamazon project, done as homework for the February 2018 UNC Coding Boot Camp. When complete, it will be a database-backed storefront application with a command line interface. Further comments on the app and code will be added here when it is complete.",
+  "main": "bamazonCustomer.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wucheeman/bamazon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wucheeman/bamazon/issues"
+  },
+  "homepage": "https://github.com/wucheeman/bamazon#readme",
+  "keywords": [],
+  "dependencies": {
+    "inquirer": "^5.2.0",
+    "mysql": "^2.15.0"
+  }
+}
