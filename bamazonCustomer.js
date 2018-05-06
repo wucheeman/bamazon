@@ -23,10 +23,48 @@ connection.connect(function(err) {
 function getAllProducts() {
   connection.query("SELECT * FROM products", function(err, result) {
     if (err) throw err;
-    console.log(result);
-    //connection.end();
+    // console.log(result);
+    console.log('Our product line-up:');
+    console.log('\n ID             PRODUCT NAME               PRICE')
+    console.log('-------------------------------------------------');
+    for (var i = 0; i < result.length; i++) {
+      let spacer = computeSpacer(i, result.length);
+      let padNeeded = computePad(result[i].product_name.length);
+      let digitSpaceNeeded = computeDigitSpace(result[i].price);
+      console.log(spacer + 
+                  result[i].item_id + " | " + 
+                  result[i].product_name + padNeeded + " | " + 
+                  ' $' + digitSpaceNeeded + result[i].price);
+    }
+    console.log('-------------------------------------------------');
   });
 }
+
+const computeSpacer = (counter, arrayLength) => {
+  if (counter < arrayLength - 1) {
+    return ' '; // single space; TODO: (future) link spacer length to field size
+  }
+  return ''; // empty string
+}
+
+const computeDigitSpace = (price) => {
+  if (price < 10) {
+    return ' ';
+  }
+  return ''; // empty string
+}
+
+const computePad = (stringLength) => {
+  let stringifiedPad = [];
+  let padNeeded = 35 - stringLength; // TODO: (future) link pad length to field size
+  for (let i = 0; i < padNeeded; i++) {
+      stringifiedPad.push(' ');
+    }
+  return finalFormPad = stringifiedPad.toString().replace(/,/g, '');
+}
+
+
+
 
 // display product id, name, and price for each product
 
