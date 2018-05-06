@@ -16,7 +16,7 @@ CREATE TABLE products (
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES
 ('Decision-Making Paperweight', 'Gifts', 24.00, 18),
-('Hitchhiker\'s Guide to the Galaxay', 'Books', 7.00, 6),
+('Hitchhiker\'s Guide to the Galaxy', 'Books', 7.00, 6),
 ('XKCD Linux Commands T-Shirt', 'Clothing', 14.00, 3),
 ('Oregon Trail Handheld Game', 'Electronics', 18.00, 26),
 ('Jamstik Wireless Smart Guitar', 'Musical Instruments', 21.00, 2),
