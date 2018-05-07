@@ -71,6 +71,7 @@ Functionality
 [] Game initializes globals correctly
 [] Game reinitializes globals correctly
 [] DB initializes without error
+[] App correctly updates DB with quantity available after a sale
 
 Display
 =======
