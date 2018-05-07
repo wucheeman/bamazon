@@ -5,10 +5,13 @@ PRIMARY ASSIGNMENT
 [x] package.json and package-lock.json with dependencies
 [x] connect to bamazon and retrieve all products 
 [x] display product id, name, and price for each product
-[] prompt for query id to purchase and quantity desired
-[] check quantity available and accept or reject
-	() if quantity insufficient, refuse
-	() else fulfill order, update quantity, and show total price
+[x] prompt for query id to purchase and quantity desired
+[x] check quantity available and accept or reject
+	(x) if quantity insufficient, refuse
+	(x) else fulfill order, update quantity, and show total price
+[x] Update quantity in DB after sale
+[] clean up prio to test
+[] clean up post test
 
 BONUS 1
 [] pseudocode for bamazonManager.js

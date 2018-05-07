@@ -61,11 +61,24 @@ const purchaseProduct = (numProducts) => {
      const index = answer.productID - 1;
      const quantity = parseInt(answer.quantity);
      if (quantity > productArray[index].stock_quantity) {
-      console.log(`Sorry, we don't have enough`);
+        console.log(`Sorry, we don't have enough`);
+        // TODO: leave?
+        connection.end();
      } else {
-       // TODO compute price, etc
-       const total = quantity * productArray[index].price;
-       console.log(`Sold for $ ${total}.00!`);
+        const total = quantity * productArray[index].price;
+        const newStockQuantity = productArray[index].stock_quantity - quantity;
+        console.log('The type of newStockQuantity is ' + typeof newStockQuantity);
+        console.log(`Sold for $ ${total}.00!`);
+        // TODO refactor into new function
+        const updateQuery = `
+          UPDATE products
+          SET stock_quantity = ${newStockQuantity}
+          WHERE item_id = ${answer.productID};` ;
+          connection.query(updateQuery, function(err, result) {
+            if (err) throw err;
+            console.log(`Updated!`);
+            connection.end();
+          });
      }
   }); // end of .then
 }
@@ -119,7 +132,7 @@ connection.connect(function(err) {
   // check quantity available.
 
   // if quantity insufficient, refuse / else fulfill order, update quantity, and show total price
-  connection.end();
+  // connection.end();
 });
 
 
