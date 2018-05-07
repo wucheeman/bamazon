@@ -24,9 +24,10 @@ function getAllProducts() {
   connection.query("SELECT * FROM products", function(err, result) {
     if (err) throw err;
     // console.log(result);
-    console.log('Our product line-up:');
-    console.log('\n ID             PRODUCT NAME               PRICE')
-    console.log('-------------------------------------------------');
+    console.log('\n                OUR PRODUCTS');
+    console.log('===================================================');
+    console.log(' ID             PRODUCT NAME                PRICE')
+    console.log('---------------------------------------------------');
     for (var i = 0; i < result.length; i++) {
       let spacer = computeSpacer(i, result.length);
       let padNeeded = computePad(result[i].product_name.length);
@@ -34,17 +35,17 @@ function getAllProducts() {
       console.log(spacer + 
                   result[i].item_id + " | " + 
                   result[i].product_name + padNeeded + " | " + 
-                  ' $' + digitSpaceNeeded + result[i].price);
+                  ' $' + digitSpaceNeeded + result[i].price + '.00');
     }
-    console.log('-------------------------------------------------');
+    console.log('---------------------------------------------------');
   });
 }
 
 const computeSpacer = (counter, arrayLength) => {
   if (counter < arrayLength - 1) {
-    return ' '; // single space; TODO: (future) link spacer length to field size
+    return '  '; // double space; TODO: (future) link spacer length to field size
   }
-  return ''; // empty string
+  return ' '; // single space;
 }
 
 const computeDigitSpace = (price) => {
