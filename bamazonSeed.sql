@@ -24,7 +24,7 @@ VALUES
 ('Moving Inkblot Rorschach Mask', 'Clothing', 30.00, 12),
 ('Smartphone Game Boy Adapter', 'Electronics', 38.00, 4),
 ('Iron Man Floating Action Figure', 'Gifts', 6.00, 7),
-('Star Wars Poster', 'Fine Art', 12.00, 7);
+('Star Wars Poster', 'Fine Art', 12.00, 30);
 
 -- SELECT * FROM products
 
