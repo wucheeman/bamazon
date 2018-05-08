@@ -10,7 +10,7 @@ PRIMARY ASSIGNMENT
 	(x) if quantity insufficient, refuse
 	(x) else fulfill order, update quantity, and show total price
 [x] Update quantity in DB after sale
-[] clean up prio to test
+[x] refactor and clean up prior to test
 [] clean up post test
 
 BONUS 1
