@@ -1,0 +1,91 @@
+BAMAZON - RESULTS FROM TEST, ROUND 1 
+
+d = deferred
+e = met by enhancement
+f = failed
+p = passed
+s = skipped
+w = waiting for further work
+
+Requirements
+============
+[p] Uses npm mysql package (literally)
+[p] Uses npm inquirer package
+[p] CLI application
+[p] Contains MySQL db 'bamazon' with a table called 'products' containing:
+   (p) item_id (unique id for each product)
+   (p) product_name (Name of product)
+   (p) department_name
+   (p) price (cost to customer)
+   (p) stock_quantity (how much of the product is available in stores)
+[p] DB is populated with 10+ products
+[p] Contains Node application 'bamazonCustomer.js`.
+[p] On startup, application displays all available items, with ids, names, and price
+[p] App has two prompts after startup display completes
+   (p) input id of product to purchase
+   (p) quantity desired
+[p] App checks if quantity available >= quantity desired and responds
+   (p) fulfills order if enough is available, updates quantity remaining, and shows total price
+   (p) rejects order if enough is not available
+
+Bonus
+=====
+BONUS 1
+[W] Adds Node application called `bamazonManager.js`.
+[w] On startup, application list a set of menu options:
+   () View Products for Sale
+   () View Low Inventory
+   () Add to Inventory
+   () Add New Product
+[w] `View Products for Sale` lists every available item: the item IDs, names, prices, and quantities.
+[w] `View Low Inventory` lists all items with an inventory count lower than five.
+[w] `Add to Inventory` displays a prompt that will let the manager "add more" of any item
+[w] `Add New Product` enables addition of a completely new product
+BONUS 2
+[w] Adds new MySQL table `departments` containing the following columns:
+   () department_id
+   () department_name
+   () over_head_costs (A dummy number set for each department)
+[w] Modifies the products table so that there's a product_sales column
+[w] Modifies `bamazonCustomer.js` to update each individual product's total revenue from each sale.
+[w] Adds Node app `bamazonSupervisor.js`.
+[w] On start-up, application lists:
+   () View Product Sales by Department
+   () Create New Department
+[w] `View Product Sales by Department` displays a table in bash similar to this:
+
+| department_id | department_name | over_head_costs | product_sales | total_profit |
+| ------------- | --------------- | --------------- | ------------- | ------------ |
+| 01            | Electronics     | 10000           | 20000         | 10000        |
+| 02            | Clothing        | 60000           | 100000        | 40000        |
+
+[w] `total_profit` is computed on the fly using the difference between `over_head_costs` and `product_sales`
+[w] add `total_profit` column to the `departments` table.
+BONUS 3
+[w] Remove `total_profit` column and use a custom alias. (See hints in assignment.)
+
+Functionality
+=============
+[p] Game initializes globals correctly
+[p] Game reinitializes globals correctly
+[p] DB initializes via seed file without error 
+[p] App computes correct total price
+[p] App correctly updates DB with quantity available after a sale
+[f] App rejects product id if it does not exist in DB
+  (f) id = 0
+  (p) id > 10
+  (p) id is string
+  (p) id is empty string
+
+Display
+=======
+None
+
+Installation
+============
+[d] Package installs correctly in a new directory
+[d] All dependencies are in package.json
+
+Cleanup
+=======
+[d] JS delinted
