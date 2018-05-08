@@ -62,9 +62,11 @@ BONUS 2
 | 02            | Clothing        | 60000           | 100000        | 40000        |
 
 [] `total_profit` is computed on the fly using the difference between `over_head_costs` and `product_sales`
-[] add `total_profit` column to the `departments` table.
+[] Create New Department adds a row with all appropriate data to the 'departments' table
+[] bamazonCustomer.js updates product_sales column with each sale (price X quantity)
+
 BONUS 3
-[] Remove `total_profit` column and use a custom alias. (See hints in assignment.)
+[] Use a custom alias. (See hints in assignment.)
 
 Functionality
 =============
