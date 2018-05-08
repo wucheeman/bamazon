@@ -70,8 +70,14 @@ Functionality
 =============
 [] Game initializes globals correctly
 [] Game reinitializes globals correctly
-[] DB initializes without error
+[] DB initializes via seed file without error 
+[] App computes correct total price
 [] App correctly updates DB with quantity available after a sale
+[] App rejects product id if it does not exist in DB
+  () id = 0
+  () id > 10
+  () id is string
+  () id is empty string
 
 Display
 =======
