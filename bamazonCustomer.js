@@ -71,8 +71,6 @@ const purchaseProduct = (numProducts) => {
     }
   ])
   .then(function(answer) {
-    // TODO delete
-     console.log(`You want to buy ${answer.quantity} unit(s) of ${answer.productID}`);
      const index = answer.productID - 1;
      const quantity = parseInt(answer.quantity);
      if (quantity > productArray[index].stock_quantity) {
@@ -116,9 +114,6 @@ const updateDB = (newStockQuantity, productID) => {
   WHERE item_id = ${productID};` ;
   connection.query(updateQuery, function(err, result) {
     if (err) throw err;
-
-    // TODO: delete
-    console.log(`Updated!`);
     connection.end();
   });
 }
