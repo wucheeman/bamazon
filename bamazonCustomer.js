@@ -47,9 +47,12 @@ const purchaseProduct = (numProducts) => {
     {
       name: "productID",
       type: "input",
-      message: "Input the ID of the fine product that you desire ",
+      message: "\nInput the ID of the fine product that you desire ",
       validate: function(value) {
-        if (value !== '' && isNaN(value) === false && value <= numProducts) {
+        if (value !== '' && 
+            isNaN(value) === false && 
+            value <= numProducts && 
+            value > 0) {
           return true;
         }
         return false;
@@ -87,7 +90,7 @@ const purchaseProduct = (numProducts) => {
 const showAllProducts = () => {
   connection.query("SELECT * FROM products", function(err, result) {
     if (err) throw err;
-    console.log('\n                OUR PRODUCTS');
+    console.log('\n                   OUR PRODUCTS');
     console.log('===================================================');
     console.log(' ID             PRODUCT NAME                PRICE')
     console.log('---------------------------------------------------');
