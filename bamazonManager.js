@@ -104,8 +104,6 @@ const computePad = (stringLength) => {
 
 // END REMOVE
 
-
-
 const viewLowInventory = () => {
   console.log('in viewLowInventory');
   let config = {
@@ -115,15 +113,18 @@ const viewLowInventory = () => {
       },
       1: {
         alignment: 'center',
+      },
+      2: {
+        alignment: 'center',
       }
     }
   }; 
-  let titles = ['PRODUCT', 'IN STOCK'];
+  let titles = ['ITEM ID ', 'PRODUCT', 'IN STOCK'];
   let data = productArray.filter(function(product) {
     return product.stock_quantity < 5;
   });
   let nameAndQuantity = data.map(function (product) {
-    return [product.product_name, product.stock_quantity];
+    return [product.item_id, product.product_name, product.stock_quantity];
   });
   nameAndQuantity.unshift(titles);
   console.log(table(nameAndQuantity, config)); // add , config to format
