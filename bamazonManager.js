@@ -19,49 +19,93 @@ var connection = mysql.createConnection({
 
 const displayOptions = () => {
   console.log('In display options');
-  // query DB, retrieve data on all products, assign to productArray
-// list a set of menu options for manager and
-// prompt user for choice. Based on input, 
-// call viewProducts
-// call viewLowInventory
-// call addToInventory
-// call addNewProduct
-inquirer
-  .prompt([
-    {
-      name: "choice",
-      type: "list",
-      message: 'Please make a choice',
-      choices: ['View Products', 'View Low Inventory', 'Add to Inventory', 'Add New Product'],
-    }
-  ])
-  .then(function(answer) {
-      switch(answer.choice) {
-        case 'View Products':
-          viewProducts();
-          break;
-        case 'View Low Inventory':
-          viewLowInventory();
-          break;
-        case 'Add to Inventory':
-          addToInventory();
-          break;
-        case 'Add New Product' :
-          addNewProduct();
-          break;
-        default :
-          console.log('displayOptions has a bug');
-      }
-    // TODO: remove this
-    // connection.end();
-  }); // end of .then
+  connection.query("SELECT * FROM products", function(err, result) {
+    if (err) throw err;
+    productArray = result;
+    inquirer
+      .prompt([
+        {
+          name: "choice",
+          type: "list",
+          message: 'Please make a choice',
+          choices: ['View Products', 'View Low Inventory', 'Add to Inventory', 'Add New Product'],
+        }
+      ])
+      .then(function(answer) {
+          switch(answer.choice) {
+            case 'View Products':
+              viewProducts();
+              break;
+            case 'View Low Inventory':
+              viewLowInventory();
+              break;
+            case 'Add to Inventory':
+              addToInventory();
+              break;
+            case 'Add New Product' :
+              addNewProduct();
+              break;
+            default :
+              console.log('displayOptions has a bug');
+          }
+        // TODO: remove this
+        // connection.end();
+      }); // end of .then
+  }); // end of connection.query
 } // end of displayOptions
 
 const viewProducts = () => {
   console.log('in viewProducts');
-  // Using productArray, lists every available item: the item IDs, names, prices, and quantities.
+  // TODO: refactor to use table
+  console.log('\n                         OUR PRODUCTS');
+  console.log('=============================================================');
+  console.log(' ID             PRODUCT NAME                PRICE    QUANTITY')
+  console.log('-------------------------------------------------------------');
+  for (var i = 0; i < productArray.length; i++) {
+    let spacer = computeSpacer(i, productArray.length);
+    let padNeeded = computePad(productArray[i].product_name.length);
+    let digitSpaceNeeded = computeDigitSpace(productArray[i].price);
+    let quantSpaceNeeded = computeDigitSpace(productArray[i].stock_quantity);
+    console.log(spacer + 
+                productArray[i].item_id + " | " + 
+                productArray[i].product_name + padNeeded + " | " + 
+                ' $' + digitSpaceNeeded + productArray[i].price + '.00' + " |   " +
+                quantSpaceNeeded + productArray[i].stock_quantity + "   |");
+  }
+  console.log('-------------------------------------------------------------');
   connection.end();
 }
+
+// TODO: REMOVE THESE WHEN VIEWPRODUCTS IS REFACTORED
+
+const computeSpacer = (counter, arrayLength) => {
+  // TODO: (future) link spacer length to field size
+  if (counter < arrayLength - 1) {
+    return '  '; // double space; 
+  }
+  return ' '; // single space;
+}
+
+const computeDigitSpace = (quantity) => {
+  if (quantity < 10) {
+    return ' ';
+  }
+  return ''; // empty string
+}
+
+const computePad = (stringLength) => {
+  // TODO: (future) link pad length to field size
+  let stringifiedPad = [];
+  let padNeeded = 35 - stringLength; 
+  for (let i = 0; i < padNeeded; i++) {
+      stringifiedPad.push(' ');
+    }
+  return finalFormPad = stringifiedPad.toString().replace(/,/g, '');
+}
+
+// END REMOVE
+
+
 
 const viewLowInventory = () => {
   console.log('in viewLowInventory'); 
