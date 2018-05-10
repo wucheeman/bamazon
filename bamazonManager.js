@@ -182,12 +182,7 @@ const addToInventory = () => {
       // console.log(updateQuery);
       connection.query(updateQuery, function(err, result) {
         if (err) throw err;
-        // refresh productArray with updated data
-        connection.query("SELECT * FROM products", function(err, result) {
-          if (err) throw err;
-          productArray = result;
-          connection.end();
-        }); // end of refresh query
+           connection.end();
       }); // end of update query
     } // else of else
   }); // end of .then
