@@ -2,6 +2,7 @@
 //===============================================================
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+const { table } = require('table');
 let productArray = [];
 
 // connect to bamazon
@@ -19,7 +20,7 @@ var connection = mysql.createConnection({
 
 const displayOptions = () => {
   console.log('In display options');
-  connection.query("SELECT * FROM products", function(err, result) {
+  connection.query("SELECT * FROM products", function (err, result) {
     if (err) throw err;
     productArray = result;
     inquirer
@@ -31,25 +32,23 @@ const displayOptions = () => {
           choices: ['View Products', 'View Low Inventory', 'Add to Inventory', 'Add New Product'],
         }
       ])
-      .then(function(answer) {
-          switch(answer.choice) {
-            case 'View Products':
-              viewProducts();
-              break;
-            case 'View Low Inventory':
-              viewLowInventory();
-              break;
-            case 'Add to Inventory':
-              addToInventory();
-              break;
-            case 'Add New Product' :
-              addNewProduct();
-              break;
-            default :
-              console.log('displayOptions has a bug');
-          }
-        // TODO: remove this
-        // connection.end();
+      .then(function (answer) {
+        switch (answer.choice) {
+          case 'View Products':
+            viewProducts();
+            break;
+          case 'View Low Inventory':
+            viewLowInventory();
+            break;
+          case 'Add to Inventory':
+            addToInventory();
+            break;
+          case 'Add New Product':
+            addNewProduct();
+            break;
+          default:
+            console.log('displayOptions has a bug');
+        }
       }); // end of .then
   }); // end of connection.query
 } // end of displayOptions
@@ -66,11 +65,11 @@ const viewProducts = () => {
     let padNeeded = computePad(productArray[i].product_name.length);
     let digitSpaceNeeded = computeDigitSpace(productArray[i].price);
     let quantSpaceNeeded = computeDigitSpace(productArray[i].stock_quantity);
-    console.log(spacer + 
-                productArray[i].item_id + " | " + 
-                productArray[i].product_name + padNeeded + " | " + 
-                ' $' + digitSpaceNeeded + productArray[i].price + '.00' + " |   " +
-                quantSpaceNeeded + productArray[i].stock_quantity + "   |");
+    console.log(spacer +
+      productArray[i].item_id + " | " +
+      productArray[i].product_name + padNeeded + " | " +
+      ' $' + digitSpaceNeeded + productArray[i].price + '.00' + " |   " +
+      quantSpaceNeeded + productArray[i].stock_quantity + "   |");
   }
   console.log('-------------------------------------------------------------');
   connection.end();
@@ -96,10 +95,10 @@ const computeDigitSpace = (quantity) => {
 const computePad = (stringLength) => {
   // TODO: (future) link pad length to field size
   let stringifiedPad = [];
-  let padNeeded = 35 - stringLength; 
+  let padNeeded = 35 - stringLength;
   for (let i = 0; i < padNeeded; i++) {
-      stringifiedPad.push(' ');
-    }
+    stringifiedPad.push(' ');
+  }
   return finalFormPad = stringifiedPad.toString().replace(/,/g, '');
 }
 
@@ -108,29 +107,47 @@ const computePad = (stringLength) => {
 
 
 const viewLowInventory = () => {
-  console.log('in viewLowInventory'); 
-  // Using productArray, lists all items with an inventory count lower than five.
+  console.log('in viewLowInventory');
+  let config = {
+    columns: {
+      0: {
+        alignment: 'center',
+      },
+      1: {
+        alignment: 'center',
+      }
+    }
+  }; 
+  let titles = ['PRODUCT', 'IN STOCK'];
+  let data = productArray.filter(function(product) {
+    return product.stock_quantity < 5;
+  });
+  let nameAndQuantity = data.map(function (product) {
+    return [product.product_name, product.stock_quantity];
+  });
+  nameAndQuantity.unshift(titles);
+  console.log(table(nameAndQuantity, config)); // add , config to format
   connection.end();
 }
 
 const addToInventory = () => {
   console.log('in addToInventory');
-// Display prompt to "add more" of any item or none
-// Formulate query to update stock quantity for selected item using UPDATE... SET ... WHERE.
-// Runs query
+  // Display prompt to "add more" of any item or none
+  // Formulate query to update stock quantity for selected item using UPDATE... SET ... WHERE.
+  // Runs query
   connection.end();
 }
 
 
 const addNewProduct = () => {
   console.log('in addNewProduct');
-// Display prompt for new product_name
-// Display prompt for new department name (given list of departments)
-// Display prompt for new product price
-// Display prompt for new product stock_quantity
-// Formulate query to update DB for new product using INSERT INTO and values from prompts
-// Runs query
-  connection.end();  
+  // Display prompt for new product_name
+  // Display prompt for new department name (given list of departments)
+  // Display prompt for new product price
+  // Display prompt for new product stock_quantity
+  // Formulate query to update DB for new product using INSERT INTO and values from prompts
+  // Runs query
+  connection.end();
 }
 
 
@@ -139,7 +156,7 @@ const addNewProduct = () => {
 // APPLICATION
 //==================================================================
 
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) throw err;
   displayOptions();
 }); 
