@@ -235,7 +235,7 @@ const addNewProduct = () => {
     {
       name: "quantity",
       type: "input",
-      message: "How many units?" ,
+      message: "\nHow many units?" ,
       validate: function(value) {
         if (value !== '' && 
             isNaN(value) === false &&
@@ -247,13 +247,23 @@ const addNewProduct = () => {
     }
   ])
   .then(function(answer) {
-    console.log(answer.product_name,
-                answer.department_name, 
-                answer.price,
-                answer.quantity);
-    // Formulate query to update DB for new product using INSERT INTO and values from prompts
-    // Runs query
-  connection.end();
+    let product_name = answer.product_name;
+    // console.log(typeof product_name);
+    let price = parseFloat(answer.price)
+    let stock_quantity = parseInt(answer.quantity);
+    // console.log(answer.product_name,
+    //             answer.department_name, 
+    //             price,
+    //             stock_quantity);
+    const newProdQuery = `
+      INSERT INTO products (product_name, department_name, price, stock_quantity)
+      VALUES('${product_name}', '${answer.department_name}', ${price}, ${stock_quantity});
+    `;
+    // console.log(newProdQuery);
+    connection.query(newProdQuery, function(err, result) {
+      if (err) throw err;
+      connection.end();
+    }); // end of new product query
   }); // end of .then
 } // end of function
 
