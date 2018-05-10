@@ -10,6 +10,8 @@ Create a README
 [] Because screenshots (and well-written READMEs) are extremely important in the context of GitHub, this will be part of the grading.
 [] Provide a schema.sql file if we want Ariel to run it
   
+Make an animated GIF, like the example from the previous week's exercise.
+  
   
   
 Add To GitHub Pages and More
