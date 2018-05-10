@@ -16,9 +16,9 @@ PRIMARY ASSIGNMENT
 
 BONUS 1
 [x] pseudocode for bamazonManager.js
-[] Connect to DB and call displayOptions
-[] display options added
-[] calls out to stub implementations of viewProducts, viewLowInventory, addToInventory, addNewProduct
+[x] Connect to DB and call displayOptions
+[x] display options added
+[x] calls out to stub implementations of viewProducts, viewLowInventory, addToInventory, addNewProduct
 [] add retrieval of data from DB and assignment to global variable
 [] in viewProducts, list all data on every item
 [] in ViewLowInventory, list all items with inventory < 5
