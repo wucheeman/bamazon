@@ -9,8 +9,7 @@ Create a README
 [] Include any other screenshots you deem necessary to help someone who has never been introduced to your application understand the purpose and function of it. This is how you will communicate to potential employers/other developers in the future what you built and why, and to show how it works. 
 [] Because screenshots (and well-written READMEs) are extremely important in the context of GitHub, this will be part of the grading.
 [] Provide a schema.sql file if we want Ariel to run it
-  
-Make an animated GIF, like the example from the previous week's exercise.
+[] Make an animated GIF, like the example from the previous week's exercise.
   
   
   
