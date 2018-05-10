@@ -62,8 +62,10 @@ const purchaseProduct = (numProducts) => {
       name: "quantity",
       type: "input",
       message: "How many ?" ,
-      validate: function(value) {
-        if (value !== '' && isNaN(value) === false) {
+      validate: function(value) {   
+        if (value !== '' && 
+            isNaN(value) === false &&
+            value > -1) {
           return true;
         }
         return false;
@@ -71,9 +73,12 @@ const purchaseProduct = (numProducts) => {
     }
   ])
   .then(function(answer) {
-     const index = answer.productID - 1;
+     const index = parseInt(answer.productID) - 1;
      const quantity = parseInt(answer.quantity);
-     if (quantity > productArray[index].stock_quantity) {
+     if (quantity === 0) {
+      console.log(`Sorry you don't want to buy anything. Goodbye!`);
+      connection.end();
+    } else if (quantity > productArray[index].stock_quantity) {
         console.log(`\nSorry, we don't have enough`);
         connection.end();
      } else {
