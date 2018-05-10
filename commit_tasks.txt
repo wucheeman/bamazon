@@ -13,6 +13,11 @@ PRIMARY ASSIGNMENT
 [x] refactor and clean up prior to test
 [x] clean up post test
 [] Use the npm package 'table' rather than console.log
+[] Correct bugs in purchaseProduct();
+	 () quantity should be validated so that it is > -1
+	 () if quantity is 0 then function should terminate and close connection
+	 () statement assigning value to index in .then function should use parseInt()
+[] Correct bug in updateDB(); productArray should be refreshed after update and is not
 
 BONUS 1
 [x] pseudocode for bamazonManager.js
