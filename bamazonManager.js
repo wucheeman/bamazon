@@ -133,11 +133,65 @@ const viewLowInventory = () => {
 
 const addToInventory = () => {
   console.log('in addToInventory');
-  // Display prompt to "add more" of any item or none
-  // Formulate query to update stock quantity for selected item using UPDATE... SET ... WHERE.
-  // Runs query
-  connection.end();
-}
+  inquirer
+  .prompt([
+    {
+      name: "productID",
+      type: "input",
+      message: "\nInput the ID of the product ",
+      validate: function(value) {
+        if (value !== '' && 
+            isNaN(value) === false && 
+            value <= productArray.length && 
+            value > 0) {
+          return true;
+        }
+        return false;
+      }
+    },
+    {
+      name: "quantity",
+      type: "input",
+      message: "How many units?" ,
+      validate: function(value) {
+        if (value !== '' && 
+            isNaN(value) === false &&
+            value > -1) {
+          return true;
+        }
+        return false;
+      }
+    }
+  ])
+  .then(function(answer) {
+    const productID = answer.productID;
+    const index = parseInt(answer.productID) - 1;
+    const quantity = parseInt(answer.quantity) + productArray[index].stock_quantity;
+    //console.log(index, quantity);
+    if (quantity === 0) {
+      console.log('No update required');
+      connection.end();
+    } else {
+      // NOT DRY with bamazon.js
+      // TODO (future) modularize application so only one instance is needed
+      updateQuery = `
+        UPDATE products
+        SET stock_quantity = ${quantity}
+        WHERE item_id = ${productID};
+      `
+      // console.log(updateQuery);
+      connection.query(updateQuery, function(err, result) {
+        if (err) throw err;
+        // refresh productArray with updated data
+        connection.query("SELECT * FROM products", function(err, result) {
+          if (err) throw err;
+          productArray = result;
+          connection.end();
+        }); // end of refresh query
+      }); // end of update query
+    } // else of else
+  }); // end of .then
+} // end of function
 
 
 const addNewProduct = () => {
@@ -150,9 +204,6 @@ const addNewProduct = () => {
   // Runs query
   connection.end();
 }
-
-
-
 
 // APPLICATION
 //==================================================================
