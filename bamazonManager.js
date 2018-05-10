@@ -191,14 +191,71 @@ const addToInventory = () => {
 
 const addNewProduct = () => {
   console.log('in addNewProduct');
-  // Display prompt for new product_name
-  // Display prompt for new department name (given list of departments)
-  // Display prompt for new product price
-  // Display prompt for new product stock_quantity
-  // Formulate query to update DB for new product using INSERT INTO and values from prompts
-  // Runs query
+  inquirer
+  .prompt([
+    {
+      name: "product_name",
+      type: "input",
+      message: "\nName of the new product ",
+      validate: function(value) {
+        if (value !== '' ) {
+          return true;
+        }
+        return false;
+      }
+    },
+    {
+      name: "department_name",
+      type: "list",
+      message: "\nWhat department will sell it ",
+      choices: ['Gifts', 'Books', 'Clothing', 'Electronics', 'Musical Instruments', 'Outdoor Furnishings', 'Fine Art'],
+      validate: function(value) {
+        if (value !== '' && 
+            isNaN(value) === false && 
+            value <= productArray.length && 
+            value > 0) {
+          return true;
+        }
+        return false;
+      }
+    },
+    {
+      name: "price",
+      type: "input",
+      message: "\nWhat should its price be ",
+      validate: function(value) {
+        if (value !== '' && 
+            isNaN(value) === false &&  
+            value > 0) {
+          return true;
+        }
+        return false;
+      }
+    },
+    {
+      name: "quantity",
+      type: "input",
+      message: "How many units?" ,
+      validate: function(value) {
+        if (value !== '' && 
+            isNaN(value) === false &&
+            value > 0) {
+          return true;
+        }
+        return false;
+      }
+    }
+  ])
+  .then(function(answer) {
+    console.log(answer.product_name,
+                answer.department_name, 
+                answer.price,
+                answer.quantity);
+    // Formulate query to update DB for new product using INSERT INTO and values from prompts
+    // Runs query
   connection.end();
-}
+  }); // end of .then
+} // end of function
 
 // APPLICATION
 //==================================================================
