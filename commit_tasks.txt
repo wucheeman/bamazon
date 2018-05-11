@@ -31,6 +31,7 @@ BONUS 1
 [x] in addNewProduct, formulate and run query
 [] cleanup and delint
 [] bug fix after test
+[] Use the npm package 'table' rather than console.log for viewProducts (stretch)
 
 BONUS 2
 [] sql seed file update for departments table
