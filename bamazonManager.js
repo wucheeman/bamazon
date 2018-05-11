@@ -2,8 +2,13 @@
 //===============================================================
 const mysql = require('mysql');
 const inquirer = require('inquirer');
-const { table } = require('table');
+const { table , getBorderCharacters } = require('table');
 let productArray = [];
+
+// import {
+//   table,
+//   getBorderCharacters
+// } from table;
 
 // connect to bamazon
 var connection = mysql.createConnection({
@@ -55,67 +60,52 @@ const displayOptions = () => {
 
 const viewProducts = () => {
   console.log('in viewProducts');
-  // TODO: refactor to use table
-  console.log('\n                         OUR PRODUCTS');
-  console.log('=============================================================');
-  console.log(' ID             PRODUCT NAME                PRICE    QUANTITY')
-  console.log('-------------------------------------------------------------');
-  for (var i = 0; i < productArray.length; i++) {
-    let spacer = computeSpacer(i, productArray.length);
-    let padNeeded = computePad(productArray[i].product_name.length);
-    let digitSpaceNeeded = computeDigitSpace(productArray[i].price);
-    let quantSpaceNeeded = computeDigitSpace(productArray[i].stock_quantity);
-    console.log(spacer +
-      productArray[i].item_id + " | " +
-      productArray[i].product_name + padNeeded + " | " +
-      ' $' + digitSpaceNeeded + productArray[i].price + '.00' + " |   " +
-      quantSpaceNeeded + productArray[i].stock_quantity + "   |");
-  }
-  console.log('-------------------------------------------------------------');
+  let config = {
+    border: getBorderCharacters(`void`),
+    columns: {
+      0: {
+        width: 10,
+        alignment: 'center',
+      },
+      1: {
+        width: 35,
+        alignment: 'left',
+      },
+      2: {
+        width: 10,
+        alignment: 'right',
+      },
+      3: {
+        width: 10,
+        alignment: 'right',
+      }
+    }
+  };
+  let titles = ['ITEM ID ', 'PRODUCT', 'PRICE', 'QUANTITY'];
+  let productView = productArray.map(function (product) {
+    return [product.item_id, product.product_name, product.price, product.stock_quantity];
+  });
+  productView.unshift(titles);
+  console.log(table(productView, config));
   connection.end();
-}
-
-// TODO: REMOVE THESE WHEN VIEWPRODUCTS IS REFACTORED
-
-const computeSpacer = (counter, arrayLength) => {
-  // TODO: (future) link spacer length to field size
-  if (counter < arrayLength - 1) {
-    return '  '; // double space; 
-  }
-  return ' '; // single space;
 };
-
-const computeDigitSpace = (quantity) => {
-  if (quantity < 10) {
-    return ' ';
-  }
-  return ''; // empty string
-};
-
-const computePad = (stringLength) => {
-  // TODO: (future) link pad length to field size
-  let stringifiedPad = [];
-  let padNeeded = 35 - stringLength;
-  for (let i = 0; i < padNeeded; i++) {
-    stringifiedPad.push(' ');
-  }
-  return stringifiedPad.toString().replace(/,/g, '');
-};
-
-// END REMOVE
 
 const viewLowInventory = () => {
   console.log('in viewLowInventory');
   let config = {
+    border: getBorderCharacters(`void`),
     columns: {
       0: {
+        width: 10,
         alignment: 'center',
       },
       1: {
-        alignment: 'center',
+        width: 35,
+        alignment: 'left',
       },
       2: {
-        alignment: 'center',
+        width: 10,
+        alignment: 'right',
       }
     }
   };
@@ -129,7 +119,7 @@ const viewLowInventory = () => {
   nameAndQuantity.unshift(titles);
   console.log(table(nameAndQuantity, config)); // add , config to format
   connection.end();
-}
+};
 
 const addToInventory = () => {
   console.log('in addToInventory');
