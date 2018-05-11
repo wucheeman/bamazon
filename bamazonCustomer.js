@@ -2,6 +2,7 @@
 // =======================================================================
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+const { table , getBorderCharacters } = require('table');
 let productArray = [];
 
 // connect to bamazon
@@ -16,38 +17,13 @@ var connection = mysql.createConnection({
 // FUNCTIONS
 // ========================================================================
 
-const computeSpacer = (counter, arrayLength) => {
-  // TODO: (future) link spacer length to field size
-  if (counter < arrayLength - 1) {
-    return '  '; // double space; 
-  }
-  return ' '; // single space;
-}
-
-const computeDigitSpace = (price) => {
-  if (price < 10) {
-    return ' ';
-  }
-  return ''; // empty string
-}
-
-const computePad = (stringLength) => {
-  // TODO: (future) link pad length to field size
-  let stringifiedPad = [];
-  let padNeeded = 35 - stringLength; 
-  for (let i = 0; i < padNeeded; i++) {
-      stringifiedPad.push(' ');
-    }
-  return finalFormPad = stringifiedPad.toString().replace(/,/g, '');
-}
-
 const purchaseProduct = (numProducts) => {
   inquirer
   .prompt([
     {
       name: "productID",
       type: "input",
-      message: "\nInput the ID of the fine product that you desire ",
+      message: "Input the ID of the fine product that you desire ",
       validate: function(value) {
         if (value !== '' && 
             isNaN(value) === false && 
@@ -93,21 +69,31 @@ const purchaseProduct = (numProducts) => {
 const showAllProducts = () => {
   connection.query("SELECT * FROM products", function(err, result) {
     if (err) throw err;
-    console.log('\n                   OUR PRODUCTS');
-    console.log('===================================================');
-    console.log(' ID             PRODUCT NAME                PRICE')
-    console.log('---------------------------------------------------');
+    console.log('\nWelcome to Bamzon! Here is our product catalog:\n')
     productArray = result;
-    for (var i = 0; i < productArray.length; i++) {
-      let spacer = computeSpacer(i, productArray.length);
-      let padNeeded = computePad(productArray[i].product_name.length);
-      let digitSpaceNeeded = computeDigitSpace(productArray[i].price);
-      console.log(spacer + 
-                  productArray[i].item_id + " | " + 
-                  productArray[i].product_name + padNeeded + " | " + 
-                  ' $' + digitSpaceNeeded + productArray[i].price + '.00');
-    }
-    console.log('---------------------------------------------------');
+    let config = {
+      border: getBorderCharacters(`void`),
+      columns: {
+        0: {
+          width: 10,
+          alignment: 'center',
+        },
+        1: {
+          width: 35,
+          alignment: 'left',
+        },
+        2: {
+          width: 10,
+          alignment: 'right',
+        },
+      }
+    };
+    let titles = ['ITEM ID', 'PRODUCT', 'PRICE'];
+    let productView = productArray.map(function (product) {
+      return [product.item_id, product.product_name, product.price];
+    });
+    productView.unshift(titles);
+    console.log(table(productView, config));
     purchaseProduct(productArray.length);
   });
 }
@@ -126,8 +112,6 @@ const updateDB = (newStockQuantity, productID) => {
 
 // APPLICATION
 // ==================================================================
-
-
 
 connection.connect(function(err) {
   if (err) throw err;
