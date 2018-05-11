@@ -2,29 +2,23 @@ POST DEVELOPMENT TASKS
 
 Create a README
 ===============
-[] Add a `README.md` to your repository describing the project. Review these:
+[x] Add a `README.md` to your repository describing the project. Review these:
   * [About READMEs](https://help.github.com/articles/about-readmes/)
   * [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
-[] include screenshots, a gif, and/or a video showing us that you got the app working with no bugs. You can include these screenshots or a link to a video in a `README.md` file.
-[] Include any other screenshots you deem necessary to help someone who has never been introduced to your application understand the purpose and function of it. This is how you will communicate to potential employers/other developers in the future what you built and why, and to show how it works. 
-[] Because screenshots (and well-written READMEs) are extremely important in the context of GitHub, this will be part of the grading.
-[] Provide a schema.sql file if we want Ariel to run it
-[] Make an animated GIF, like the example from the previous week's exercise.
-  
-  
+[x] include screenshots, a gif, and/or a video showing us that you got the app working with no bugs. You can include these screenshots or a link to a video in a `README.md` file.
+[x] Include any other screenshots you deem necessary to help someone who has never been introduced to your application understand the purpose and function of it. This is how you will communicate to potential employers/other developers in the future what you built and why, and to show how it works. 
+[x] Because screenshots (and well-written READMEs) are extremely important in the context of GitHub, this will be part of the grading.
+[x] Provide a schema.sql file if we want Ariel to run it
+[d] Make an animated GIF, like the example from the previous week's exercise.
   
 Add To GitHub Pages and More
 ============================
-[] Create a GitHub Pages page for the project
-[] Confirm Github Pages page is accessible from the Internet
-[] Complete full test round on GitHub Pages page and confirm no issues
 [] Add the game to your portfolio via an active link and update GitHub.
 [] Confirm updated portfolio in GitHub Pages is accessible and no issues
 
 Submit Homework
 ===============
 [] Provide link to GitHub repo in BCS
-[] Provide link to GitHub Pages in BCS
 [] Provide link to updated portfolio in the comments section of your homework.
 [] Add comment on changes from Requirements.
 [] Add other comments
