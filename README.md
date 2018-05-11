@@ -12,9 +12,11 @@ You must have MySQL installed on your computer. Once you have it ready, download
 	
 and then enter your password. If your user account does not require a password (bad security for the real world, but OK for homework), omit the '-p'. This will create an instance of the Bamazon database and populate it with some product data.
 
-Click on the image below for a video that shows the application in use.
+Click on the image below to download a video that shows the application in use.
 
 [![video demo](./bamazon_demo__much_smaller.png)](bamazon_demo.mp4)
+
+GitHub can't show files as big as a two-minute video. After clicking on it, click on 'View Raw' to begin the download. 
 
 To start shopping, a customer would enter:
 
@@ -26,7 +28,7 @@ A manager would enter:
 
 	$ node bamazonManager.js
 
-and the application offers the option of viewing the product catalog (with quantity in stock added), identify low inventory items, increase inventory and add a new product. Once the manager choses one and completes the task, the application ends. Future development will keep the application running until the manager decides to quit.
+and the application offers the option of viewing the product catalog (with quantity in stock added), identify low inventory items, increase inventory, and add a new product. In each task, the manager is led through the process by a series of prompts. Once the manager choses a task and completes it, the application ends. Future development will keep the application running until the manager decides to quit.
 
 
 ## Authors
