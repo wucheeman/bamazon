@@ -29,7 +29,7 @@ BONUS 1
 [x] in addToInventory, display prompt and create and then run query
 [x] in addNewProduct, build prompts for all required data
 [x] in addNewProduct, formulate and run query
-[] cleanup and delint
+[x] cleanup and delint
 [] bug fix after test
 [] Use the npm package 'table' rather than console.log for viewProducts (stretch)
 
