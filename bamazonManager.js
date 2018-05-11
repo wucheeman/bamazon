@@ -24,7 +24,7 @@ var connection = mysql.createConnection({
 //=================================================================
 
 const displayOptions = () => {
-  console.log('In display options');
+  //console.log('In display options');
   connection.query('SELECT * FROM products', function (err, result) {
     if (err) throw err;
     productArray = result;
@@ -59,7 +59,7 @@ const displayOptions = () => {
 }; // end of displayOptions
 
 const viewProducts = () => {
-  console.log('in viewProducts');
+  //console.log('in viewProducts');
   let config = {
     border: getBorderCharacters(`void`),
     columns: {
@@ -91,7 +91,7 @@ const viewProducts = () => {
 };
 
 const viewLowInventory = () => {
-  console.log('in viewLowInventory');
+  //console.log('in viewLowInventory');
   let config = {
     border: getBorderCharacters(`void`),
     columns: {
@@ -117,12 +117,12 @@ const viewLowInventory = () => {
     return [product.item_id, product.product_name, product.stock_quantity];
   });
   nameAndQuantity.unshift(titles);
-  console.log(table(nameAndQuantity, config)); // add , config to format
+  console.log(table(nameAndQuantity, config));
   connection.end();
 };
 
 const addToInventory = () => {
-  console.log('in addToInventory');
+  //console.log('in addToInventory');
   inquirer
     .prompt([
       {
@@ -157,7 +157,6 @@ const addToInventory = () => {
       const productID = answer.productID;
       const index = parseInt(answer.productID) - 1;
       const quantity = parseInt(answer.quantity) + productArray[index].stock_quantity;
-      //console.log(index, quantity);
       if (quantity === 0) {
         console.log('No update required');
         connection.end();
@@ -169,7 +168,6 @@ const addToInventory = () => {
           SET stock_quantity = ${quantity}
           WHERE item_id = ${productID};
         `;
-        // console.log(updateQuery);
         connection.query(updateQuery, function (err, result) {
           if (err) throw err;
           connection.end();
@@ -180,7 +178,7 @@ const addToInventory = () => {
 
 
 const addNewProduct = () => {
-  console.log('in addNewProduct');
+  //console.log('in addNewProduct');
   inquirer
     .prompt([
       {
@@ -238,14 +236,12 @@ const addNewProduct = () => {
     ])
     .then(function (answer) {
       let product_name = answer.product_name;
-      // console.log(typeof product_name);
       let price = parseFloat(answer.price)
       let stock_quantity = parseInt(answer.quantity);
       const newProdQuery = `
         INSERT INTO products (product_name, department_name, price, stock_quantity)
         VALUES('${product_name}', '${answer.department_name}', ${price}, ${stock_quantity});
       `;
-      // console.log(newProdQuery);
       connection.query(newProdQuery, function (err, result) {
         if (err) throw err;
         connection.end();

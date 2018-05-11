@@ -16,7 +16,7 @@ PRIMARY ASSIGNMENT
 	 (x) quantity should be validated so that it is > -1
 	 (x) if quantity is 0 then function should terminate and close connection
 	 (x) statement assigning value to index in .then function should use parseInt()
-[] Use the npm package 'table' rather than console.log (stretch)
+[x] Use the npm package 'table' rather than console.log (stretch)
 
 BONUS 1
 [x] pseudocode for bamazonManager.js
@@ -30,8 +30,8 @@ BONUS 1
 [x] in addNewProduct, build prompts for all required data
 [x] in addNewProduct, formulate and run query
 [x] cleanup and delint
-[] bug fix after test
-[] Use the npm package 'table' rather than console.log for viewProducts (stretch)
+[x] bug fix after test
+[x] Use the npm package 'table' rather than console.log for viewProducts (stretch)
 
 BONUS 2
 [] sql seed file update for departments table
